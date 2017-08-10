@@ -1,9 +1,9 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": 
-    "react"
-  ,
+  "plugins": [
+    "react",
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -33,6 +33,10 @@
           "array"
         ]
       }
+    ],
+    "react/jsx-first-prop-new-line": [
+      2,
+      "multiline"
     ]
   }
 }
