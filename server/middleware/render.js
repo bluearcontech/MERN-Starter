@@ -2,9 +2,9 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 
-import createStore from '../app/store/createStore'
-import routes from '../app/routes'
-import RootContainer from '../app/containers/RootContainer'
+import createStore from '../../app/store/createStore'
+import routes from '../../app/routes'
+import RootContainer from '../../app/containers/RootContainer'
 
 const renderFullPage = (html, css, preloadedState) => (
   `
@@ -29,7 +29,7 @@ const renderFullPage = (html, css, preloadedState) => (
   `
 )
 
-const handleRender = (req, res, next) => {
+const renderApp = (req, res, next) => {
   // eslint-disable-next-line consistent-return
   match({ routes, location: req.url }, (err, redirectLocation, renderProps) => {
     if (err) {
@@ -68,4 +68,4 @@ const handleRender = (req, res, next) => {
   })
 }
 
-export default handleRender
+export default renderApp
