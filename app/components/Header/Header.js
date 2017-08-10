@@ -19,6 +19,11 @@ export default () => (
             <Link to="/features">Features</Link>
           </li>
         </ul>
+        <ul className="nav navbar-nav navbar-righ">
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
