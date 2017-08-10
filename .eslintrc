@@ -1,9 +1,9 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": [
-    "react",
-  ],
+  "plugins": 
+    "react"
+  ,
   "env": {
     "browser": true,
     "node": true,
