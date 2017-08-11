@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { IndexLink, Link } from 'react-router'
+import IndexLink from 'react-router/lib/IndexLink'
+import Link from 'react-router/lib/Link'
+import { logoutUserRequest } from 'App/actions/user'
 
-const Header = ({ user }) => ( // eslint-disable-line react/prop-types
+const Header = ({ user, logoutUserRequest }) => ( // eslint-disable-line no-shadow
   <nav className="navbar navbar-default">
     <div className="container-fluid">
       <div className="navbar-header">
@@ -19,6 +21,12 @@ const Header = ({ user }) => ( // eslint-disable-line react/prop-types
           <li>
             <Link to="/features">Features</Link>
           </li>
+          {
+            user && user.isAdmin &&
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          }
         </ul>
         {
           user ? (
@@ -29,7 +37,7 @@ const Header = ({ user }) => ( // eslint-disable-line react/prop-types
                 </Link>
               </li>
               <li>
-                <Link to="/logout">Logout</Link>
+                <Link to="/" onClick={logoutUserRequest}>Logout</Link>
               </li>
             </ul>
           ) : (
@@ -45,8 +53,17 @@ const Header = ({ user }) => ( // eslint-disable-line react/prop-types
   </nav>
 )
 
+Header.propTypes = {
+  user: PropTypes.object,
+  logoutUserRequest: PropTypes.func.isRequired,
+}
+
+Header.defaultProps = {
+  user: null,
+}
+
 const mapStateToProps = state => ({
   user: state.user,
 })
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { logoutUserRequest })(Header)
