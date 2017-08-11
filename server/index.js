@@ -1,21 +1,19 @@
-import express from 'express'
 import hook from 'css-modules-require-hook'
-
-import projectConfig from '../config/project.config'
-import cssModulesConfig from '../config/css-modules.config'
-
+import cssModulesConfig from 'Config/css-modules.config'
+import projectConfig from 'Config/project.config'
+import createServer from './server'
+import seed from './seed'
 
 hook(cssModulesConfig)
 
-const app = express()
-
-if (projectConfig.globals.__DEV__) { // eslint-disable-line no-underscore-dangle
-  app.use(require('./middleware/hot-reload').default) // eslint-disable-line global-require
+if (projectConfig.globals.__DEV__) {
+  // FIXME: require.extensions is deprecated.
+  require.extensions['.png'] = () => {}
 }
 
-app.use(express.static(projectConfig.dir_dist))
-app.use(require('./middleware/render').default)
+const server = createServer()
 
-app.listen(projectConfig.port, () => {
-  console.log(`Server listening on port ${projectConfig.port}.`)
+server.listen(server.get('port'), () => {
+  console.log(`Server listening on port ${server.get('port')}.`)
+  seed()
 })
