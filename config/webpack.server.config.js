@@ -1,3 +1,4 @@
+const webpack  = require('webpack')
 const extend  = require('extend')
 const projectConfig = require('./project.config')
 const baseConfig = require('./webpack.base.config')
@@ -5,6 +6,7 @@ const baseConfig = require('./webpack.base.config')
 module.exports = extend(true, {}, baseConfig, {
   entry: {
     server: [
+      'babel-polyfill',
       projectConfig.paths.server('index.js'),
     ],
   },
@@ -28,4 +30,16 @@ module.exports = extend(true, {}, baseConfig, {
     __filename: false,
     __dirname: false,
   },
+  plugins: baseConfig.plugins.concat([
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        unused: true,
+        dead_code: true,
+        warnings: false,
+      },
+      output: {
+        comments: false,
+      },
+    }),
+  ]),
 })

@@ -1,6 +1,6 @@
 const webpack = require('webpack')
-const projectConfig = require('./project.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const projectConfig = require('./project.config')
 
 module.exports = {
   devtool: 'source-map',
@@ -23,6 +23,13 @@ module.exports = {
           'postcss-loader?config=./config/postcss.config.js',
           'sass-loader?sourceMap&outputStyle=expanded'])
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
+      },
     ],
   },
   plugins: [
@@ -33,4 +40,12 @@ module.exports = {
       'process.env.NODE_ENV': projectConfig.globals.__DEV__ ? '"development"' : '"production"',
     }),
   ],
+  resolve: {
+    alias: {
+      App: projectConfig.paths.app(),
+      Config: projectConfig.paths.config(),
+      Public: projectConfig.paths.public(),
+      Server: projectConfig.paths.server(),
+    },
+  }
 }
