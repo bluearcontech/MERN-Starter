@@ -1,17 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { browserHistory, Router } from 'react-router'
+import browserHistory from 'react-router/lib/browserHistory'
+import Router from 'react-router/lib/Router'
 
-import createStore from './store/createStore'
-import HmrContainer from './containers/HmrContainer'
-import AppContainer from './containers/AppContainer'
+import createStore from 'App/store'
+import createRoutes from 'App/routes'
+import HmrContainer from 'App/containers/HmrContainer'
+import AppContainer from 'App/containers/AppContainer'
 
-import projectConfig from '../config/project.config'
+import projectConfig from 'Config/project.config'
 
-const initialState = window.__INITIAL_STATE__ // eslint-disable-line no-underscore-dangle
+import 'App/styles/app.scss'
+
+const initialState = window.__INITIAL_STATE__
 const store = createStore(initialState)
 
-let routes = require('./routes').default
+let routes = createRoutes(store)
 
 const MOUNT_NODE = document.getElementById('root')
 
@@ -28,10 +32,10 @@ const render = () => {
   )
 }
 
-if (projectConfig.globals.__DEV__) { // eslint-disable-line no-underscore-dangle
+if (projectConfig.globals.__DEV__) {
   if (module.hot) {
-    module.hot.accept('./routes', () => {
-      routes = require('./routes').default // eslint-disable-line global-require
+    module.hot.accept('App/routes', () => {
+      routes = require('App/routes').default(store) // eslint-disable-line global-require
       render()
     })
   }
