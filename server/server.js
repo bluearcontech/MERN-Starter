@@ -7,7 +7,7 @@ import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 import expressValidator from 'express-validator'
 
-import projectConfig from 'Config/project.config'
+import projectConfig from '../config/project.config'
 import serverConfig from './config/server'
 import './middleware/passport'
 import routes from './routes'

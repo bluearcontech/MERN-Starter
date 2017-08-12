@@ -1,5 +1,5 @@
 import React from 'react'
-import reactLogo from 'Public/react-logo.png'
+import reactLogo from '../../../public/react-logo.png'
 import Style from '../style.scss'
 
 export default () => (
