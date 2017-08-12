@@ -51,6 +51,7 @@
     "react/jsx-first-prop-new-line": [
       2,
       "multiline"
-    ]
+    ],
+    "linebreak-style": ["error", "windows"]
   }
 }

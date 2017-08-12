@@ -1,5 +1,5 @@
-const webpack  = require('webpack')
-const extend  = require('extend')
+const webpack = require('webpack')
+const extend = require('extend')
 const projectConfig = require('./project.config')
 const baseConfig = require('./webpack.base.config')
 

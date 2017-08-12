@@ -13,8 +13,8 @@ const config = {
 }
 
 config.globals = {
-  '__DEV__': config.env === 'development',
-  '__PROD__': config.env === 'production',
+  __DEV__: config.env === 'development',
+  __PROD__: config.env === 'production',
 }
 
 function base() {
